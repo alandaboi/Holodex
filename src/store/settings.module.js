@@ -1,11 +1,11 @@
 /* eslint-disable no-shadow */
 import Vue from "vue";
-import { createSimpleMutation, getUILang, getLang } from "@/utils/functions";
+import { createSimpleMutation, getUILang, getTLLang } from "@/utils/functions";
 
 const userLanguage = navigator.language || navigator.userLanguage || "en";
 
-const englishNamePrefs = new Set(["en", "es", "fr", "id", "pt", "de", "ru", "it"]);
-const lang = getLang(userLanguage);
+const englishNamePrefs = new Set(["en", "es", "fr", "id", "pt", "de", "ru", "it", "es-ES", "en-GB"]);
+const lang = getTLLang(userLanguage);
 
 const initialState = {
     // Language

@@ -27,21 +27,22 @@ export function getVideoThumbnails(ytVideoKey, useWebP) {
     };
 }
 
-export function getUILang(weblang) {
+export function getUILang(browserlang) {
     const validLangs = new Set(langs.map((x) => x.val));
-    if (validLangs.has(String(weblang))) {
-        return String(weblang);
+    if (validLangs.has(String(browserlang))) {
+        return String(browserlang);
     }
-    if (validLangs.has(String(weblang).split("-")[0].toLowerCase())) {
-        return String(weblang).split("-")[0].toLowerCase();
+    if (validLangs.has(String(browserlang).split("-")[0].toLowerCase())) {
+        return String(browserlang).split("-")[0].toLowerCase();
     }
     return "en";
 }
 
-export function getLang(weblang) {
-    const Langs = new Set(TL_LANGS.map((x) => x.value));
-    if (Langs.has(String(weblang).split("-")[0].toLowerCase())) {
-        return String(weblang).split("-")[0].toLowerCase();
+export function getTLLang(browserlang) {
+    const tlLangs = new Set(TL_LANGS.map((x) => x.value));
+    if (tlLangs.has(String(browserlang))) return String(browserlang);
+    if (tlLangs.has(String(browserlang).split("-")[0].toLowerCase())) {
+        return String(browserlang).split("-")[0].toLowerCase();
     }
     return "en";
 }

@@ -11,6 +11,7 @@ Vue.use(VueI18n);
 
 export const langs = [
     { val: "en", display: "English", credit: "@Holodex" },
+    { val: "en-GB", display: "English (GB)", credit: "@Holodex" },
     { val: "ja", display: "日本語", credit: "Yourein#3960" },
     { val: "zh", display: "繁體中文", credit: "angel84326#7887" },
     { val: "ko", display: "한국어", credit: "AlexKoala#0253" },
@@ -29,6 +30,9 @@ export const langs = [
 export const dayjsLangs = {
     async en() {
         await import("dayjs/locale/en");
+    },
+    "en-GB": async () => {
+        await import("dayjs/locale/en-gb");
     },
     async ja() {
         await import("dayjs/locale/ja");
@@ -109,7 +113,7 @@ export const i18n = new VueI18n({
     },
 });
 
-const loadedLanguages = ["en"];
+const loadedLanguages = ["en", "en-GB"];
 
 function setI18nLanguage(lang) {
     dayjsLangs[lang]();
