@@ -14,6 +14,7 @@ export const langs = [
     { val: "en-CA", display: "English (Canadian)", credit: "@Holodex" },
     { val: "ja", display: "日本語", credit: "Yourein#3960" },
     { val: "zh", display: "繁體中文", credit: "angel84326#7887" },
+    { val: "zh-CN", display: "简体中文", credit: "Nyzio#2197" },
     { val: "ko", display: "한국어", credit: "AlexKoala#0253" },
     { val: "es-ES", display: "Español España", credit: "TraduSquare (Darkc0m y D3fau4)" },
     { val: "es", display: "Español Latino", credit: "Aldo#3682" },
@@ -25,6 +26,7 @@ export const langs = [
     { val: "it", display: "Italiano", credit: "テオさん#0139" },
     { val: "fr", display: "Français", credit: "pinembour#7770" },
     { val: "tr", display: "Türkçe", credit: "creeperkafasipw#1861" },
+    // { val: "ar", display: "العربية", credit: "Nyzio#2197" },
 ];
 
 export const dayjsLangs = {
@@ -39,6 +41,9 @@ export const dayjsLangs = {
     },
     async zh() {
         await import("dayjs/locale/zh-tw");
+    },
+    "zh-CN": async () => {
+        await import("dayjs/locale/zh-cn");
     },
     async es() {
         await import("dayjs/locale/es");
@@ -73,6 +78,9 @@ export const dayjsLangs = {
     async tr() {
         await import("dayjs/locale/tr");
     },
+    // async ar() {
+    //    await import("dayjs/locale/ar");
+    // },
 };
 export const i18n = new VueI18n({
     locale: "en", // Set locale
@@ -131,6 +139,7 @@ export function loadLanguageAsync(lang) {
         "es-ES": "es-ES",
         ms: "ms-MY",
         zh: "zh-TW",
+        "zh-CN": "zh-CN",
         id: "id-ID",
         ru: "ru-RU",
         fr: "fr-FR",
@@ -139,6 +148,7 @@ export function loadLanguageAsync(lang) {
         it: "it-IT",
         ko: "ko-KR",
         tr: "tr-TR",
+        // ar: "ar",
     };
 
     // If the same language
