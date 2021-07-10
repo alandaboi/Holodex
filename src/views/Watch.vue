@@ -76,11 +76,11 @@
                             v-if="hasLiveChat && showLiveChatOverride"
                             :color="showLiveChat ? 'primary' : ''"
                         >
-                            <v-icon
-                                >M20,2H4C2.9,2,2,2.9,2,4v18l4-4h14c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z
+                            <v-icon>
+                                M20,2H4C2.9,2,2,2.9,2,4v18l4-4h14c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z
                                 M9.9,10.8v3.8h-2v-3.8L5.1,6.6h2.4l1.4,2.2 l1.4-2.2h2.4L9.9,10.8z
-                                M18.9,8.6h-2v6h-2v-6h-2v-2h6V8.6z</v-icon
-                            >
+                                M18.9,8.6h-2v6h-2v-6h-2v-2h6V8.6z
+                            </v-icon>
                         </v-btn>
                         <v-btn icon lg @click="toggleFullScreen">
                             <v-icon>{{ icons.mdiFullscreen }}</v-icon>
@@ -103,6 +103,7 @@
                     </template>
                 </WatchToolBar>
                 <WatchInfo :video="video" key="info" @timeJump="seekTo" v-if="!theatherMode" />
+                <WatchQuickEditor v-if="role === 'admin' || role === 'editor'" :video="video" />
                 <!-- Mobile mode only sidebar -->
                 <WatchSideBar :video="video" @timeJump="seekTo" v-if="isMobile" />
                 <!-- Mobile mode Mugen -->
@@ -119,6 +120,7 @@
             <div class="related-videos pt-0 row ma-0" :class="{ 'sidebar-width': !isMobile && !theatherMode }">
                 <v-col v-if="theatherMode" md="8" lg="9" class="pa-0">
                     <WatchInfo :video="video" key="info" @timeJump="seekTo" />
+                    <WatchQuickEditor v-if="role === 'admin' || role === 'editor'" :video="video" />
                     <v-divider />
                     <WatchComments
                         :comments="comments"
@@ -165,6 +167,7 @@ import WatchSideBar from "@/components/watch/WatchSideBar.vue";
 import WatchLiveChat from "@/components/watch/WatchLiveChat.vue";
 import WatchComments from "@/components/watch/WatchComments.vue";
 import WatchToolBar from "@/components/watch/WatchToolbar.vue";
+import WatchQuickEditor from "@/components/watch/WatchQuickEditor.vue";
 
 import { decodeHTMLEntities, syncState } from "@/utils/functions";
 import { mapState } from "vuex";
@@ -187,6 +190,7 @@ export default {
         WatchSideBar,
         WatchComments,
         WatchToolBar,
+        WatchQuickEditor,
         WatchMugen: () => import("@/components/watch/WatchMugen.vue"),
         WatchPlaylist: () => import("@/components/watch/WatchPlaylist.vue"),
     },
@@ -361,6 +365,9 @@ export default {
         },
         isPlaylist() {
             return this.$route.query.playlist;
+        },
+        role() {
+            return this.$store.state.userdata?.user?.role;
         },
     },
     watch: {
